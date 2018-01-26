@@ -23,6 +23,7 @@ def norm_fit(bincenters, pop, range_set):
     if bincenters[0] > 1: #only if you have big bincenters values
         to_subtract = bincenters[0]
         bincenters = [ x - to_subtract for x in bincenters ]
+        #Ignore this line
 
     pop = np.array(pop) #because curve_fit expects this type
     bincenters = np.array(bincenters)
