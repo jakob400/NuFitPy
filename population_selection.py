@@ -3,6 +3,7 @@ import numpy as np
 from poisson_fit import poisson_fit
 from norm_fit import norm_fit
 from range_def import range_def
+import functions as fn
 
 def population_selection ( histvalues, analysis_range, range_set ):
     analysis_bins, total_bins = range_def( analysis_range, range_set ) #establishing range parameters
@@ -20,7 +21,8 @@ def population_selection ( histvalues, analysis_range, range_set ):
 
     bincenters = 0.5*(binEdges[1:]+binEdges[:-1])
     width = 0.5
-    norm_fit ( bincenters, pop ,range_set ) #fitting curve, and plotting fit
+    #norm_fit ( bincenters, pop ,range_set ) #fitting curve, and plotting fit
+    fn.exp_fit ( bincenters, pop, range_set )
 
     histvalues = histvalues[lower_bound+1:max_bound]
 
