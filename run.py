@@ -10,9 +10,9 @@ if (i == 0):
     os.system('cls' if os.name == 'nt' else 'clear')
     os.system('cls' if os.name == 'nt' else 'clear')
     print(' ===========================================')
-    print('|-|   NuFitPy: Version 3.2                |-|')
+    print('|-|   NuFitPy: Version 3.3                |-|')
     print('|-|   Author: J Weirathmueller            |-|')
-    print('|-|   Last Updated: November 20th, 2017   |-|')
+    print('|-|   Last Updated: February 9th, 2017    |-|')
     print(' ===========================================')
     print('\n\n')
     i = i+1

@@ -23,14 +23,12 @@ def plot(filetype, filename):
     pop = [] #I don't think this is used for anything.
 
 
-    background_histvalues = np.genfromtxt('Data/bckgrnd2.dat', delimiter='', unpack = True, skip_header = 0 )
-
+    background_histvalues = np.genfromtxt('Data/background1.csv', delimiter='', unpack = True, skip_header = 0)
 
 
     while True:
         if ( filetype == '.csv' ):
-                imported_data = np.genfromtxt(filename, delimiter=',', unpack = True, skip_header = 28 )  # Imports data file skipping first 28 lines
-                histvalues = imported_data[2]
+                imported_data = np.genfromtxt(filename, delimiter=',', unpack = True, skip_header = 0 )  # Imports data file skipping first 28 lines
                 break
         elif ( filetype == '.tsv' ):
                 imported_data = np.genfromtxt(filename, delimiter='\t', unpack = True, skip_header = 23 )  # Imports data file skipping first 23 lines
@@ -41,16 +39,14 @@ def plot(filetype, filename):
                 histvalues = imported_data.astype(int)
                 break
 
-
-
-    #f = pd.read_csv('runtimes.csv').as_matrix() #opening file
-    #for i in range(len(f)):
-        #print(filename[5:-4],'compared to ',f[i][0])
-        #print(filename[5:-4])
-        #print(f[i][0])
-        #if (f[i][0] == filename[5:-4]): #checking if the file has a runtime in runtimes.csv
-            #file_time = int(f[i][1]) # copying over sample runtime
-
+    while True:
+        yesno = input('\nDo you need to transpose your data?(y/n)\n')
+        if all([yesno != 'y',yesno != 'n']):
+            print('Invalid input')
+        else:
+            if yesno == 'y':
+                histvalues = np.transpose(imported_data)[1]
+            break
 
 
     while True:
@@ -61,18 +57,6 @@ def plot(filetype, filename):
             if yesno == 'y':
                 histvalues = background_scaler(background_histvalues, histvalues ) #removing background noise
             break
-
-    #while True:
-    #    yesno = input('\nWould you like to normalize the data?(y/n)\n')
-    #    if all([yesno != 'y',yesno != 'n']):
-    #        print('Invalid input')
-    #    else:
-    #        if yesno == 'y':
-    #            histvalues = np.array(histvalues)
-    #            histvalues = ( histvalues / file_time ) #normalizing data
-    #        break
-
-    #^^^^^^^^This ruins breaks curve_fit for some reason
 
 
 
@@ -90,7 +74,7 @@ def plot(filetype, filename):
                 plt.show(block=False) #shows plot without blocking script
             break
 
-    number_of_peaks = int(input('\nHow many peaks would you like to analyze \n'))
+    number_of_peaks = int(input('\nHow many ranges would you like to analyze \n'))
     analysis_range = [[None for i in range(2)] for j in range(number_of_peaks)]
 
 

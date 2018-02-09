@@ -18,7 +18,7 @@ def exp_fn(x,a,b,x0):
 
 
 def exp_fit(bincenters, pop, range_set):
-    nbins_int = np.arange(0,8600)
+    nbins_int = np.arange(0,8600) # Not sure how to change this yet.
     pop = [x+1 for x in pop] #These lines do not affect the final plot visually. They simply add a value to each bin so that the curve_fit can function properly.
 
     to_subtract = 0
@@ -38,12 +38,12 @@ def exp_fit(bincenters, pop, range_set):
         peak1y.append(pop[x])
         errpeak1y.append(sqrt(pop[x]))
 
-    counts_taken_in_range = sum(pop)
+    #counts_taken_in_range = sum(pop)
 
 
     # fit with curve_fit
     parameters, cov_matrix = curve_fit(exp_fn, peak1x, peak1y)
-    print ('Amplitude = %.5f \t Mean = %.5f \t Sigma = %.5f \t Counts = %.5f' % (parameters[0],parameters[1]+to_subtract,parameters[2], counts_taken_in_range) )
+    print ('a = %.5f \t b = %.5f \t x0 = %.5f' % (parameters[0],parameters[1],parameters[2]) )
 
     #Now lets plot a poisson distribution
     plt.plot(nbins_int, gaussian(nbins_int-to_subtract, *parameters),'green', lw=2)#plots after
